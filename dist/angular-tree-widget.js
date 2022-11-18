@@ -117,7 +117,7 @@
                 scope: { nodes: '=', tree: '=', options: '=?' },
                 template: '<ul>'
                 + '<li ng-repeat="node in nodes | nodeFilter:options.filter track by node.nodeId" class="node" id="{{::node.nodeId}}">'
-                + '<i class="tree-node-ico pointer" ng-class="{\'tree-node-expanded\': node.expanded && (node.children | nodeFilter:options.filter).length > 0,\'tree-node-collapsed\':!node.expanded && (node.children | nodeFilter:options.filter).length > 0}" ng-click="toggleNode(node)"></i>'
+                + '<i class="tree-node-ico pointer" ng-class="{\'tree-node-expanded\': node.children && options.filter ? true : node.expanded && (node.children | nodeFilter:options.filter).length > 0,\'tree-node-collapsed\':!node.expanded && (node.children | nodeFilter:options.filter).length > 0}" ng-click="toggleNode(node)"></i>'
                 + '<span class="node-title pointer" ng-click="selectNode(node, $event)" ng-class="{\'disabled\':node.disabled}">'
                 + '<span><i class="tree-node-ico" ng-if="options.showIcon" ng-class="{\'tree-node-image\':node.children, \'tree-node-leaf\':!node.children}" ng-style="node.image && {\'background-image\':\'url(\'+node.image+\')\'}"></i>'
                 + '     <span class="node-name" tabindex="{{::(node.focusable ? 0 : -1)}}" ng-class="{selected: node.selected&& !node.disabled}">'
@@ -126,7 +126,7 @@
                 + '     </span>'
                 + '</span>'
                 + '</span>'
-                + '<treenode ng-if="node.children && node.expanded" nodes=\'node.children\' tree="tree" options="options"></treenode>'
+                + '<treenode ng-if="node.children && options.filter ? true : node.expanded" nodes=\'node.children\' tree="tree" options="options"></treenode>'
                 + '</li>'
                 + '</ul>',
                 compile: function (element) {
